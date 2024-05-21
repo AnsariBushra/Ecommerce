@@ -2,29 +2,38 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Product = () => {
-  const [data, setData] = useState([]);
-  const [filter, setFilter] = useState(data);
-  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState([products]);
 
-  let componentMounted = true;
+  const getProducts = async (props) => {
+    const url = `https://dummyjson.com/products`;
+    setLoading(true);
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    setProducts(parsedData.products);
+    setFilteredProducts(parsedData.products); // Initialize filtered products with all products
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      const response = await fetch("https://fakestoreapi.com/products/category/electronics");
-      // const response = await fetch("https://dummyjson.com/products");
-      if (componentMounted) {
-        setData(await response.clone().json());
-        setFilter(await response.json());
-        setLoading(false);
-        console.log(filter);
-      }
-      return () => {
-        componentMounted = false;
-      };
-    };
     getProducts();
   }, []);
+
+  const filterProductsByCategory = (category) => {
+    if (category === null || category === "all") {
+      // If "All" button is clicked or if category is explicitly set to "all", show all products
+      setSelectedCategory(null);
+      setFilteredProducts(products);
+    } else {
+      setSelectedCategory(category);
+      const filtered = products.filter(
+        (product) => product.category === category
+      );
+      setFilteredProducts(filtered);
+    }
+  };
 
   const Loading = () => {
     return (
@@ -38,42 +47,82 @@ const Product = () => {
       </>
     );
   };
+
   const ShowProducts = () => {
     return (
       <>
-        <div className="button d-flex justify-content-center mb-3 pb-5">
-          <button className="btn btn-outline-secondary me-2">All</button>
-          <button className="btn btn-outline-secondary me-2">Laptops</button>
-          <button className="btn btn-outline-secondary me-2">
+        <div className="button d-flex justify-content-center mb-2 mt-3 pb-5">
+          <button
+            className="btn btn-outline-secondary me-4"
+            onClick={() => filterProductsByCategory("all")}
+          >
+            All
+          </button>
+          <button
+            className="btn btn-outline-secondary me-4"
+            onClick={() => filterProductsByCategory("laptops")}
+          >
+            Laptops
+          </button>
+          <button
+            className="btn btn-outline-secondary me-4"
+            onClick={() => filterProductsByCategory("smartphones")}
+          >
             Mobile Phones
           </button>
-          <button className="btn btn-outline-secondary me-2">Watches</button>
+          <button
+            className="btn btn-outline-secondary me-4"
+            onClick={() => filterProductsByCategory("fragrances")}
+          >
+            Fragrances
+          </button>
+          <button
+            className="btn btn-outline-secondary me-4"
+            onClick={() => filterProductsByCategory("skincare")}
+          >
+            Skincare
+          </button>
+          <button
+            className="btn btn-outline-secondary me-4"
+            onClick={() => filterProductsByCategory("groceries")}
+          >
+            Groceries
+          </button>
+          <button
+            className="btn btn-outline-secondary me-4"
+            onClick={() => filterProductsByCategory("home-decoration")}
+          >
+            Home Decoration
+          </button>
         </div>
-       {filter.map((products) => {
-          return (
-            <>
-              <div className="col-md-3 mb-4">
-                <div className="card h-100 text-center p-4" key={products.id}>
-                  <img
-                    src={products.image}
-                    className="card-img-top"
-                    alt={products.title}
-                    style={{ height: "250px" }}
-                  />
-                  <div className="card-body" style={{ height: "150px" }}>
-                    <h5 className="card-title mb-0">
-                      {products.title.substring(0, 20)}
-                    </h5>
-                    <p className="card-text lead fw-bold">${products.price}</p>
-                    <Link to="/" className="btn btn-secondary">
-                      Buy Now
-                    </Link>
+          {filteredProducts.map((element) => {
+            return (
+              <>
+                <div className="col-md-3 mb-4" key={element.id}>
+                  <div className="card h-100 text-center p-4" style={{backgroundColor:"rgb(250 250 250)", border:'0px'}}>
+                    <img
+                      src={element.thumbnail}
+                      className="card-img-top"
+                      alt={element.title}
+                      style={{ height: "200px" }}
+                    />
+                    <div className="card-body" style={{ height: "150px" }}>
+                      <h5 className="card-title mb-0" key={element.title}>
+                        {element.title.substring(0, 20)}
+                      </h5>
+                      <p className="card-text lead fw-bold" key={element.price}>
+                        ${element.price}
+                      </p>
+                      <Link to="/" className="btn btn-secondary">
+                        {" "}
+                        Buy Now{" "}
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </>
-          );
-        })}
+              </>
+            );
+          })}
       </>
     );
   };
