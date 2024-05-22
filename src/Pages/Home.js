@@ -1,6 +1,7 @@
 import React from "react";
 import Product from "./Product";
-/*https://media.istockphoto.com/id/959309722/vector/music-abstract-background-blue-equalizer-for-music-showing-sound-waves-with-music-waves-music.jpg?s=612x612&w=0&k=20&c=lsPqnmbXEIa1z7LOq1qSGxNlF12BkMifXdIxWKboWWQ= */
+import Services from "./Services";
+
 const Home = () => {
   return (
     <div className="home">
@@ -12,12 +13,13 @@ const Home = () => {
         <div className="card-img-overlay d-flex flex-column justify-content-center text-center">
           <div className="container">
             <h5 className="card-title display-3 fw-bolder mb-0 mt-5">Our Products</h5>
-            <p className="card-text lead fs-2">
+            <p className="homecard-text lead fs-2" style={{color:'#857e7e', fontWeight:'400'}}>
               CHECK OUT ALL THE PRODUCTS
             </p>
           </div>
         </div>
       </div>
+      <Services />
       <Product/>
     </div>
   );
