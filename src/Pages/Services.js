@@ -4,7 +4,7 @@ const Services = () => {
   return (
     <>
       <div className="container-fluid my-4 pt-4">
-        <h1 className="display-6 fw-normal mx-0 text-center">OUR SERVICES</h1>
+        <h1 className="display-6 fw-normal mx-0 text-center my-5">OUR SERVICES</h1>
         <hr />
       </div>
 

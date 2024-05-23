@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 const Navbar = (props) => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary py-2 shadow-sm">
+      <nav className="navbar navbar-expand-lg fixed-top bg-body-tertiary py-2 shadow-sm">
         <div className="container-fluid me-auto d-flex">
           <div>
             <img src="https://media.istockphoto.com/id/1184778656/vector/radio-tower.jpg?s=612x612&w=0&k=20&c=0eNTjnSjPqriCDRKrGmj_JIkvhQhDTi5JEM-gMAfydk=" style={{ width: "40px", height: "43px", borderRadius: "10px"}} className="m-2" alt="" />

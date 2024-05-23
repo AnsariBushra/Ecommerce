@@ -27,7 +27,7 @@ color: rgb(149, 149, 149);
   font-family: Verdana, Geneva, Tahoma, sans-serif  ;
 }
 
-.card-text{
+ .service-card p{
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: rgb(153, 153, 162);
 }
@@ -44,4 +44,9 @@ color: rgb(149, 149, 149);
 .service-card p{
   margin-left: 40px;
   padding-left: 25px;
+}
+
+.products{
+  text-decoration: underline;
+  color: black;
 }
