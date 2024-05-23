@@ -1,7 +1,7 @@
 import './App.css';
 import Home from './Pages/Home';
 import Product from './Pages/Product';
-import Navbar from 'D:/Ecommerce/frontend/src/Components/Navbar.js';
+import Navbar from './Components/Navbar.js';
 import Services from './Pages/Services';
 import Contact from './Pages/Contact';
 import { Route, Routes} from 'react-router-dom';

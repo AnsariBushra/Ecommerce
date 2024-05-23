@@ -129,7 +129,7 @@ const Product = () => {
 
   return (
     <div>
-      <div className="container my-5 py-5">
+      <div className="container mt-5 py-5">
         <div className=" d-flex row">
           <div className="col-12">
             <h1 className="display-6 fw-normal text-center">LATEST PRODUCTS</h1>
